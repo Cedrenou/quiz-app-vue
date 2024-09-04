@@ -9,6 +9,7 @@
             <label :for="answer">{{ answer }}</label>
           </div>
           <div class="flex flex-row w-full justify-between">
+            <div v-if="formInvalid && isCorrect === null" class="border-yellow-700 border-8 w-full items-center flex justify-center bg-yellow-600 mr-4">{{formInvalid}}</div>
             <div v-if="isCorrect" class="border-green-700 border-8 w-full items-center flex justify-center bg-green-600 mr-4">Correct !</div>
             <div v-else-if="!isCorrect && isCorrect != null" class="border-red-700 border-8 w-full items-center flex justify-center bg-red-600 mr-4">Incorrect !</div>
             <button v-if="isCorrect === null" class="border-2 rounded bg-blue-600 p-4 hover:bg-blue-900" type="submit">Submit</button>
@@ -30,20 +31,27 @@ const picked = ref()
 const questionNumber = ref(0)
 const totalCorrectResponse = ref(0)
 const isCorrect = ref(null)
+const formInvalid = ref('')
 
 function registerAnswer(answer) {
-  console.log(answer)
   const goodAnswer = questions[questionNumber.value].answer
-  if (answer === goodAnswer) {
-    isCorrect.value = true
-    totalCorrectResponse.value++
+
+  if (answer) {
+    console.log(answer)
+    if (answer === goodAnswer) {
+      isCorrect.value = true;
+      totalCorrectResponse.value++;
+    } else {
+      isCorrect.value = false;
+    }
   } else {
-    isCorrect.value = false
+    formInvalid.value = 'please select one response'
   }
 }
 
 function nextQuestion() {
   isCorrect.value = null
+  formInvalid.value = ''
   questionNumber.value++
 }
 
