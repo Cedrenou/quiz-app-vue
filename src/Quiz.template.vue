@@ -18,7 +18,7 @@
       </div>
     </form>
 
-    <span>totalCorrectResponse : {{totalCorrectResponse}}</span>
+    <span>Your final score : {{totalCorrectResponse}} / {{questions.length}}</span>
 
   </div>
 </template>
