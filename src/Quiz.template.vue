@@ -39,8 +39,6 @@ function registerAnswer(answer) {
   } else {
     isCorrect.value = false
   }
-  console.log({ goodAnswer })
-  console.log('Answer selected', answer)
   // questionNumber.value++
 }
 
