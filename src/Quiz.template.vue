@@ -11,7 +11,8 @@
           <div class="flex flex-row w-full justify-between">
             <div v-if="isCorrect" class="border-green-700 border-8 w-full items-center flex justify-center bg-green-600 mr-4">Correct !</div>
             <div v-else-if="!isCorrect && isCorrect != null" class="border-red-700 border-8 w-full items-center flex justify-center bg-red-600 mr-4">Incorrect !</div>
-          <button class="border-2 rounded bg-blue-600 p-4 hover:bg-blue-900" type="submit">Submit</button>
+            <button v-if="isCorrect === null" class="border-2 rounded bg-blue-600 p-4 hover:bg-blue-900" type="submit">Submit</button>
+            <button v-else class="border-2 rounded bg-blue-600 p-4 hover:bg-blue-900" type="button" @click="nextQuestion">Next</button>
           </div>
         </div>
       </div>
@@ -28,10 +29,14 @@ import { ref } from "vue";
 const picked = ref()
 const questionNumber = ref(0)
 const totalCorrectResponse = ref(0)
-const isCorrect = ref()
+const isCorrect = ref(null)
+
+function submitForm() {
+
+}
 
 function registerAnswer(answer) {
-
+  console.log(answer)
   const goodAnswer = questions[questionNumber.value].answer
   if (answer === goodAnswer) {
     isCorrect.value = true
@@ -39,7 +44,12 @@ function registerAnswer(answer) {
   } else {
     isCorrect.value = false
   }
-  // questionNumber.value++
+}
+
+function nextQuestion() {
+  console.log('next')
+  isCorrect.value = null
+  questionNumber.value++
 }
 
 const questions = [
