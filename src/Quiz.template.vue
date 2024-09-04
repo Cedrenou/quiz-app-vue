@@ -31,10 +31,6 @@ const questionNumber = ref(0)
 const totalCorrectResponse = ref(0)
 const isCorrect = ref(null)
 
-function submitForm() {
-
-}
-
 function registerAnswer(answer) {
   console.log(answer)
   const goodAnswer = questions[questionNumber.value].answer
@@ -47,7 +43,6 @@ function registerAnswer(answer) {
 }
 
 function nextQuestion() {
-  console.log('next')
   isCorrect.value = null
   questionNumber.value++
 }
